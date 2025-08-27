@@ -1,5 +1,7 @@
 #define VGA_ADDRESS 0xB8000
 
+#define WHITE_ON_BLACK 0x0F
+#define BLACK_ON_WHITE 0xF0 // если понадобиться 
 
 int cursor_x = 0;
 int cursor_y = 0;
@@ -21,7 +23,7 @@ void CupRuska_print(const char* str) {
         }
 
         *video++ = *str++;
-        *video++ = 0x0F; // белый на черном
+        *video++ = WHITE_ON_BLACK;
         cursor_x++;
 
         if(cursor_x >= 80) { // перенос строки, если дошли до края
@@ -37,7 +39,7 @@ void CupRuska_clear_print() {
         for(int x = 0; x < 80; x++) {
                 char* video = (char*)VGA_ADDRESS + (y * 80 + x) * 2;
                 *video = ' ';
-                *(video + 1) = 0x0F;
+                *(video + 1) = WHITE_ON_BLACK;
             }
         }
     cursor_x = 0;
@@ -45,7 +47,7 @@ void CupRuska_clear_print() {
 }
 
 
-void main() {
+void kmain() {
     CupRuska_print("Hello. \n This is a test.");
 
    // Надо написать таймер PTI CupRuska_clear_print();
