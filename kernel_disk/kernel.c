@@ -46,6 +46,10 @@ void CupRuska_clear_print() {
     cursor_y = 0;
 }
 
+void solevoy_print_char ( const char* chr) {
+    char* video = (char*)VGA_ADDRESS + (cursor_y * 80 + cursor_x) * 2;
+}
+
 
 void kmain() {
     CupRuska_print("Hello. \n This is a test.");
